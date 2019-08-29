@@ -83,7 +83,8 @@ class ReactImageMagnify extends React.Component {
         hintTextMouse: PropTypes.string,
         hintTextTouch: PropTypes.string,
         isHintEnabled: PropTypes.bool,
-        shouldHideHintAfterFirstActivation: PropTypes.bool
+        shouldHideHintAfterFirstActivation: PropTypes.bool,
+        lockImage: PropTypes.bool
     };
 
     static defaultProps = {
@@ -100,7 +101,8 @@ class ReactImageMagnify extends React.Component {
         hintTextTouch: 'Long-Touch to Zoom',
         hoverDelayInMs: 250,
         hoverOffDelayInMs: 150,
-        shouldUsePositiveSpaceLens: false
+        shouldUsePositiveSpaceLens: false,
+        lockImage: false
     };
 
     componentDidMount() {
@@ -297,7 +299,8 @@ class ReactImageMagnify extends React.Component {
             isHintEnabled,
             hintTextMouse,
             hintTextTouch,
-            shouldHideHintAfterFirstActivation
+            shouldHideHintAfterFirstActivation,
+            lockImage
         } = this.props;
 
         const smallImage = this.smallImage;
@@ -371,7 +374,8 @@ class ReactImageMagnify extends React.Component {
                     portalId: enlargedImagePortalId,
                     isPortalEnabledForTouch: isEnlargedImagePortalEnabledForTouch,
                     isTouchDetected: this.isTouchDetected,
-                    isInPlaceMode: this.isInPlaceMode
+                    isInPlaceMode: this.isInPlaceMode,
+                    lockImage
                 }}/>
             </ReactCursorPosition>
         );
