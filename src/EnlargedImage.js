@@ -108,7 +108,8 @@ export default class extends React.Component {
             containerDimensions,
             position,
             smallImage,
-            isInPlaceMode
+            isInPlaceMode,
+            lockImage
         } = this.props;
 
         if (isInPlaceMode) {
@@ -119,13 +120,16 @@ export default class extends React.Component {
             });
         }
 
-        return getLensModeEnlargedImageCoordinates({
-            containerDimensions,
-            cursorOffset,
-            largeImage,
-            position,
-            smallImage
-        });
+        if (!lockImage || !this.oldCoords) {
+            this.oldCoords = getLensModeEnlargedImageCoordinates({
+                containerDimensions,
+                cursorOffset,
+                largeImage,
+                position,
+                smallImage
+            });
+        }
+        return this.oldCoords
     }
 
     get isVisible() {
@@ -138,7 +142,8 @@ export default class extends React.Component {
         return (
             isTransitionEntering ||
             isTransitionActive ||
-            isTransitionLeaving
+            isTransitionLeaving ||
+            this.props.lockImage
         );
     }
 
@@ -192,7 +197,7 @@ export default class extends React.Component {
         const component = (
             <div { ...{
                 className: containerClassName,
-                style: this.containerStyle
+                style: {...this.containerStyle, opacity: this.isVisible || this.props.lockImage ? 1 : 0}
             }}>
                 <img { ...{
                     alt,
@@ -200,7 +205,7 @@ export default class extends React.Component {
                     src: largeImage.src,
                     srcSet: largeImage.srcSet,
                     sizes: largeImage.sizes,
-                    style: this.imageStyle,
+                    style: {...this.imageStyle, opacity: this.isVisible || this.props.lockImage ? 1 : 0},
                     onLoad,
                     onError
                 }}/>
