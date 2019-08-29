@@ -4,7 +4,7 @@
   "description": "A responsive image zoom component designed for shopping sites.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ethanselzer/react-image-magnify.git"
+    "url": "git+https://github.com/ethanselzer/react-image-magnify.git"
   },
   "author": "Ethan Selzer <ethanselzer@gmail.com>",
   "license": "MIT",
@@ -101,5 +101,9 @@
     "prop-types": "15.6.0",
     "react-cursor-position": "2.5.3",
     "react-required-if": "1.0.1"
+  },
+  "directories": {
+    "example": "example",
+    "test": "test"
   }
 }
